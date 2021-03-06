@@ -3,7 +3,7 @@
 #define ll long long int  
 #define li long int 
 #define endl "\n"
-//const unsigned int M = 1000000007;
+const long long int M = 1000000007;
 #define loop(i,n,k) for(int i=k;i<n;i++)
 #define revl(i,n,k) for(int i=k;i>n;i--)
 #define mem(a, b) memset(a, b, sizeof(a)) 
@@ -20,20 +20,22 @@
 using namespace std;
 int main() {
     fast;
-    ll n;
-    cin>>n;
-    ll a[n];
-    for(ll i=0;i<n;i++)
-        cin>>a[i];
-    ll m=0;
-    for(ll i=1;i<n;i++)
-    {
-        if(a[i]<a[i-1]){
-            m+=a[i-1]-a[i];
-			a[i]=a[i-1];
-		}
-        
-    }
-    cout<<m;
+       ll x,y;
+       cin>>x>>y;
+       ll n;
+       cin>>n;
+       ll f[7];
+       f[1]=x;
+       f[2]=y;
+       for(ll i=2;i<6;i++){
+           f[i+1]=((f[i])%M-(f[i-1])%M)%M;
+       }
+       ll z=n%6;
+       if(z==0)
+            z=6;
+       if(f[z]<0)
+            cout<<M+f[z];
+       else
+         cout<<f[z]%M;
 	return 0;
 }

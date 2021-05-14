@@ -5,6 +5,8 @@
 #define lli 		    long long int  
 #define li 			    long int 
 #define endl 		    "\n"
+#define lb              lower_bound
+#define ub              upper_bound
 #define pi              acos(-1)
 #define rep(i,n)  	    for(int i=0;i<n;i++)
 #define repk(i,k,n)     for(int i=k;i<n;i++)
@@ -30,22 +32,34 @@ bool Isprime (ll a) { if(a<=1) return false; if(a==2||a==3) return true; if(a%2=
 
 int main() {
     fast;
-    ll n,x;
-    cin>>n>>x;
-    vector<ll>p(n);
-    rep(i,n)
-        cin>>p[i];
-    ll i=0,j=n-1;
-    SORT(p);
-    ll ans=0;
-    while(i<j){
-        if(p[i]+p[j]<=x)
-            i++;
-        ans++;
-        j--;
+    int n;
+    cin>>n;
+    vector<string>v[17];
+    v[1]={"0","1"};
+    for(int i=2;i<=n;i++){
+        for(int j=0;j<v[i-1].size();j++){
+            v[i].pb(v[i-1][j]);
+        }
+        for(int j=v[i-1].size()-1;j>=0;j--){
+            v[i].pb(v[i-1][j]);
+        }
+        rep(j,v[i].size()/2){
+            string r=v[i][j];
+            REVERSE(r);
+            r+='0';
+            REVERSE(r);
+            v[i][j]=r;
+        }
+        repk(j,v[i].size()/2,v[i].size()){
+            string r=v[i][j];
+            REVERSE(r);
+            r+='1';
+            REVERSE(r);
+            v[i][j]=r;
+        }
     }
-    if(i==j)
-        ans++;
-    cout<<ans;
+    rep(i,v[n].size())
+        cout<<v[n][i]<<"\n";
+
 	return 0;
 }

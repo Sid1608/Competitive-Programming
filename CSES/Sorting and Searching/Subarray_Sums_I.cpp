@@ -30,22 +30,23 @@ bool Isprime (ll a) { if(a<=1) return false; if(a==2||a==3) return true; if(a%2=
 
 int main() {
     fast;
-    ll n,x;
-    cin>>n>>x;
-    vector<ll>p(n);
+    ll n,s;
+    cin>>n>>s;
+    ll a[n];
     rep(i,n)
-        cin>>p[i];
-    ll i=0,j=n-1;
-    SORT(p);
-    ll ans=0;
-    while(i<j){
-        if(p[i]+p[j]<=x)
-            i++;
-        ans++;
-        j--;
+        cin>>a[i];
+    ll l=0,x=0,res=0;
+    for(int r=0;r<n;r++){
+        x+=a[r];
+        while(x>s){
+            x-=a[l];
+            l++;
+        }
+        if(x==s)
+            res++;
     }
-    if(i==j)
-        ans++;
-    cout<<ans;
+    cout<<res;
+
+
 	return 0;
 }

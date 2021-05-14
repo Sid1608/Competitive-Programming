@@ -5,6 +5,8 @@
 #define lli 		    long long int  
 #define li 			    long int 
 #define endl 		    "\n"
+#define lb              lower_bound
+#define ub              upper_bound
 #define pi              acos(-1)
 #define rep(i,n)  	    for(int i=0;i<n;i++)
 #define repk(i,k,n)     for(int i=k;i<n;i++)
@@ -30,22 +32,21 @@ bool Isprime (ll a) { if(a<=1) return false; if(a==2||a==3) return true; if(a%2=
 
 int main() {
     fast;
-    ll n,x;
-    cin>>n>>x;
-    vector<ll>p(n);
+    int n;
+    cin>>n;
+    ll p[n],sum=0,s=0;
     rep(i,n)
-        cin>>p[i];
-    ll i=0,j=n-1;
-    SORT(p);
-    ll ans=0;
-    while(i<j){
-        if(p[i]+p[j]<=x)
-            i++;
-        ans++;
-        j--;
+        cin>>p[i],sum+=p[i];
+    ll tot=1<<n,min_diff=INT_MAX;
+    for(int i=0;i<tot;i++){
+        s=0;
+        for(int j=0;j<n;j++){
+            int f=1<<j;
+            if((i&f)!=0)
+                s+=p[j];
+        }
+        min_diff=min(min_diff,abs(2*s-sum));
     }
-    if(i==j)
-        ans++;
-    cout<<ans;
+    cout<<min_diff;
 	return 0;
 }

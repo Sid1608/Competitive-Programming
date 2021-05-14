@@ -27,25 +27,32 @@
 #define TC(t)           while (t--) 
 using namespace std;
 bool Isprime (ll a) { if(a<=1) return false; if(a==2||a==3) return true; if(a%2==0||a%3==0) return false; for(ll i=5;i*i<=a;i=i+6) { if(a%i==0||a%(i+2)==0) return false; } return true;}
-
 int main() {
     fast;
-    ll n,x;
-    cin>>n>>x;
-    vector<ll>p(n);
-    rep(i,n)
-        cin>>p[i];
-    ll i=0,j=n-1;
-    SORT(p);
-    ll ans=0;
-    while(i<j){
-        if(p[i]+p[j]<=x)
-            i++;
-        ans++;
-        j--;
+    ll n;
+    cin>>n;
+    ll k[n+1];
+    map<ll,pll>p;//map of pair
+    repk(i,1,n+1){
+        cin>>k[i];
+        p[k[i]]={0,0};
     }
-    if(i==j)
-        ans++;
+    ll ans=1,t=0,c=1,i;//c denotes starting
+    for(i=1;i<n+1;i++){
+        if(p[k[i]].F!=0&&p[k[i]].S!=0){//check if elements is already recognzed or not
+            if(p[k[i]].S>=c){// if index of previously recognized element is less than c then simply updadate
+                ans=max(ans,i-c);
+                c=p[k[i]].S+1;
+                p[k[i]]={1,i};
+            }
+            else    
+                p[k[i]]={1,i};
+        }
+        else
+            p[k[i]]={1,i};
+    }
+    ans=max(ans,i-c);//checking 
     cout<<ans;
+    
 	return 0;
 }

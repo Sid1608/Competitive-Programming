@@ -5,6 +5,8 @@
 #define lli 		    long long int  
 #define li 			    long int 
 #define endl 		    "\n"
+#define lb              lower_bound
+#define ub              upper_bound
 #define pi              acos(-1)
 #define rep(i,n)  	    for(int i=0;i<n;i++)
 #define repk(i,k,n)     for(int i=k;i<n;i++)
@@ -30,22 +32,15 @@ bool Isprime (ll a) { if(a<=1) return false; if(a==2||a==3) return true; if(a%2=
 
 int main() {
     fast;
-    ll n,x;
-    cin>>n>>x;
-    vector<ll>p(n);
-    rep(i,n)
-        cin>>p[i];
-    ll i=0,j=n-1;
-    SORT(p);
-    ll ans=0;
-    while(i<j){
-        if(p[i]+p[j]<=x)
-            i++;
-        ans++;
-        j--;
-    }
-    if(i==j)
-        ans++;
-    cout<<ans;
+    string s;
+    cin>>s;
+    set<string>set;
+    sort(s.begin(), s.end());
+    do {
+	   set.insert(s);
+	} while(next_permutation(s.begin(),s.end()));
+    cout<<set.size()<<"\n";
+    for(auto x:set)
+        cout<<x<<"\n";
 	return 0;
 }

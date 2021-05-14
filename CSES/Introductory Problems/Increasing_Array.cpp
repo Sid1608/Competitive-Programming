@@ -1,3 +1,4 @@
+//author:Siddharth Akar
 #include<bits/stdc++.h>
 #define ull unsigned long long int 
 #define ll long long int  
@@ -22,13 +23,18 @@ int main() {
     fast;
     ll n;
     cin>>n;
-    if(n==2||n==3)
-        cout<<"NO SOLUTION";
-    else{
-        for(int i=2;i<=n;i+=2)
-            cout<<i<<" ";
-        for(int i=1;i<=n;i+=2)
-            cout<<i<<" ";
+    ll a[n];
+    for(ll i=0;i<n;i++)
+        cin>>a[i];
+    ll m=0;
+    for(ll i=1;i<n;i++)
+    {
+        if(a[i]<a[i-1]){
+            m+=a[i-1]-a[i];
+			a[i]=a[i-1];
+		}
+        
     }
+    cout<<m;
 	return 0;
 }

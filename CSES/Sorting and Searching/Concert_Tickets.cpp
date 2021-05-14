@@ -16,36 +16,38 @@
 #define F 			    first 	
 #define S 			    second 
 #define all(v) 		    v.begin(), v.end()
-#define SORT(v) 	    sort(all(v)) 
+#define asort(v) 	    sort(all(v)) 
+#define dsort(v) 	    sort(all(v),greater<ll>()) 
 #define REVERSE(v) 	    reverse(all(v))
 #define mp 			    make_pair 
 #define pb 			    push_back 
 #define pii 		    pair<int,int>
+#define vi              vector<int>
+#define vl              vector<ll>
 #define pll 		    pair<ll,ll>
 #define sz(x)           ((int)(x).size())
 #define fast 	        ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 #define TC(t)           while (t--) 
 using namespace std;
 bool Isprime (ll a) { if(a<=1) return false; if(a==2||a==3) return true; if(a%2==0||a%3==0) return false; for(ll i=5;i*i<=a;i=i+6) { if(a%i==0||a%(i+2)==0) return false; } return true;}
-
 int main() {
     fast;
-    ll n,x;
-    cin>>n>>x;
-    vector<ll>p(n);
-    rep(i,n)
-        cin>>p[i];
-    ll i=0,j=n-1;
-    SORT(p);
-    ll ans=0;
-    while(i<j){
-        if(p[i]+p[j]<=x)
-            i++;
-        ans++;
-        j--;
+    ll n,m;
+    cin>>n>>m;
+    vl h(n),t(m);
+    for (auto &x :h) cin >> x;
+    for (auto &x :t) cin >> x;
+    multiset<ll,greater<ll>>s;
+    rep(i,h.size())
+        s.insert(h[i]);
+    rep(i,t.size()){
+        auto it=s.lower_bound(t[i]);
+        if(it==s.end())
+            cout<<-1<<endl;
+        else{
+            cout<<*it<<endl;
+            s.erase(it);
+        }
     }
-    if(i==j)
-        ans++;
-    cout<<ans;
 	return 0;
 }

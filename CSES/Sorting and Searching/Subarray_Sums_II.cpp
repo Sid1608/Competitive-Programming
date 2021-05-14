@@ -26,26 +26,26 @@
 #define fast 	        ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 #define TC(t)           while (t--) 
 using namespace std;
-bool Isprime (ll a) { if(a<=1) return false; if(a==2||a==3) return true; if(a%2==0||a%3==0) return false; for(ll i=5;i*i<=a;i=i+6) { if(a%i==0||a%(i+2)==0) return false; } return true;}
+//bool Isprime (ll a) { if(a<=1) return false; if(a==2||a==3) return true; if(a%2==0||a%3==0) return false; for(ll i=5;i*i<=a;i=i+6) { if(a%i==0||a%(i+2)==0) return false; } return true;}
 
 int main() {
     fast;
-    ll n,x;
-    cin>>n>>x;
-    vector<ll>p(n);
+    ll n,s,res=0;
+    cin>>n>>s;
+    ll a[n];
     rep(i,n)
-        cin>>p[i];
-    ll i=0,j=n-1;
-    SORT(p);
-    ll ans=0;
-    while(i<j){
-        if(p[i]+p[j]<=x)
-            i++;
-        ans++;
-        j--;
+        cin>>a[i];
+    ll currsum=0;
+    map<ll,ll>p;
+    p[0]=1;
+    rep(i,n){
+        currsum+=a[i];
+        if(p[currsum-s]!=0){
+            res+=p[currsum-s];
+            //p[currsum-s]--;
+        }
+        p[currsum]++;
     }
-    if(i==j)
-        ans++;
-    cout<<ans;
+    cout<<res;
 	return 0;
 }

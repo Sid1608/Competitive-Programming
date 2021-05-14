@@ -32,20 +32,42 @@ int main() {
     fast;
     ll n,x;
     cin>>n>>x;
-    vector<ll>p(n);
-    rep(i,n)
-        cin>>p[i];
-    ll i=0,j=n-1;
-    SORT(p);
-    ll ans=0;
-    while(i<j){
-        if(p[i]+p[j]<=x)
-            i++;
-        ans++;
-        j--;
+    ll a[n];
+    multimap<ll,ll>m;
+    rep(i,n){
+        cin>>a[i];
+        m.insert({a[i],i+1});
     }
-    if(i==j)
-        ans++;
-    cout<<ans;
+    sort(a,a+n);//1 3 5 6 
+    ll i=0,j=n-1;
+    ll r,s;
+    ll isExist=0;
+    while(i<j){
+        if(x<=a[j])
+            j--;
+        else if(a[i]==x-a[j]){
+            isExist=1;
+            r=a[i];
+            s=a[j];
+            break;
+        }
+        else if(a[i]>x-a[j])
+            j--;
+        else
+            i++;
+    }
+    if(isExist==1){
+        for(auto t:m){
+            if(t.F==r)
+                r=t.S;
+            else if(t.F==s)
+                s=t.S;
+        }
+        cout<<min(r,s)<<" "<<max(r,s);
+    }
+    else{
+        cout<<"IMPOSSIBLE";
+    }
+
 	return 0;
 }

@@ -27,25 +27,30 @@
 #define TC(t)           while (t--) 
 using namespace std;
 bool Isprime (ll a) { if(a<=1) return false; if(a==2||a==3) return true; if(a%2==0||a%3==0) return false; for(ll i=5;i*i<=a;i=i+6) { if(a%i==0||a%(i+2)==0) return false; } return true;}
-
+bool cmp(const pair<int,int> &a,const pair<int,int> &b){ //comparator
+        return a.second<b.second; 
+}
 int main() {
     fast;
-    ll n,x;
-    cin>>n>>x;
-    vector<ll>p(n);
-    rep(i,n)
-        cin>>p[i];
-    ll i=0,j=n-1;
-    SORT(p);
-    ll ans=0;
-    while(i<j){
-        if(p[i]+p[j]<=x)
-            i++;
-        ans++;
-        j--;
+    ll n;
+    cin>>n;
+    vector<pll>v;
+    rep(i,n){
+        ll a,b;
+        cin>>a>>b;
+        v.pb({a,b});
     }
-    if(i==j)
-        ans++;
-    cout<<ans;
-	return 0;
+    sort(all(v),cmp);
+    ll res=1;
+    pll curr=v[0];
+    repk(i,1,n){
+        if(v[i].F>=curr.S)
+        {
+            res++;
+            curr=v[i];
+        }
+    }
+    cout<<res;
+
 }
+
